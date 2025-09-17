@@ -1,0 +1,1257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TUALMI - Sustainable Women's Outdoor Fashion</title>
+    <meta name="description" content="Adventure meets style. Sustainable outdoor fashion designed for women who love the outdoors and want to look incredible doing it.">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+      /* Global Reset & Variables */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      :root {
+        /* Yosemite-inspired earth palette */
+        --granite-gray: #8A8D8F;
+        --sequoia-green: #4A6741;
+        --half-dome-stone: #B8ADA3;
+        --valley-mist: #F5F3F0;
+        --alpine-lake: #4A7A7A;
+        --sunset-granite: #D4A574;
+        --meadow-sage: #9CAF88;
+        --wildflower-coral: #E07A5F;
+        
+        /* Neutrals */
+        --charcoal: #2C3E50;
+        --warm-gray: #7D8A8A;
+        --cream: #FBF9F4;
+        --pure-white: #FFFFFF;
+        
+        /* Gradients */
+        --yosemite-gradient: linear-gradient(135deg, #4A6741 0%, #9CAF88 100%);
+        --granite-gradient: linear-gradient(135deg, #8A8D8F 0%, #B8ADA3 100%);
+        --sunset-gradient: linear-gradient(135deg, #E07A5F 0%, #D4A574 100%);
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        line-height: 1.6;
+        color: var(--charcoal);
+        background: var(--cream);
+        overflow-x: hidden;
+      }
+
+      .container {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 0 20px;
+      }
+
+      /* Two-Tier Navigation */
+      .header-wrapper {
+        position: fixed;
+        top: 0;
+        width: 100%;
+        z-index: 1000;
+        background: rgba(251, 249, 244, 0.98);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border-bottom: 1px solid rgba(138, 141, 143, 0.1);
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      .header-wrapper.scrolled {
+        box-shadow: 0 4px 30px rgba(44, 62, 80, 0.1);
+      }
+
+      /* Top Header */
+      .top-header {
+        padding: 15px 0;
+        border-bottom: 1px solid rgba(138, 141, 143, 0.08);
+      }
+
+      .top-header-container {
+        display: grid;
+        grid-template-columns: 1fr auto 1fr;
+        align-items: center;
+        max-width: 1600px;
+        margin: 0 auto;
+        padding: 0 30px;
+        gap: 40px;
+      }
+
+      .top-header-left {
+        display: flex;
+        align-items: center;
+      }
+
+      .search-container {
+        position: relative;
+      }
+
+      .search-bar {
+        padding: 12px 45px 12px 20px;
+        border: 1px solid rgba(138, 141, 143, 0.3);
+        border-radius: 30px;
+        background: var(--pure-white);
+        font-size: 14px;
+        width: 280px;
+        transition: all 0.3s ease;
+      }
+
+      .search-bar:focus {
+        outline: none;
+        border-color: var(--sequoia-green);
+        width: 320px;
+        box-shadow: 0 2px 15px rgba(74, 103, 65, 0.1);
+      }
+
+      .search-icon {
+        position: absolute;
+        right: 18px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: var(--warm-gray);
+        font-size: 16px;
+        cursor: pointer;
+      }
+
+      .logo {
+        text-align: center;
+        font-family: 'Playfair Display', serif;
+        font-size: 42px;
+        font-weight: 700;
+        background: var(--yosemite-gradient);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        letter-spacing: 3px;
+      }
+
+      .top-header-right {
+        display: flex;
+        gap: 30px;
+        align-items: center;
+        justify-self: end;
+      }
+
+      .top-header-right a {
+        color: var(--charcoal);
+        text-decoration: none;
+        font-weight: 500;
+        font-size: 15px;
+        transition: color 0.3s ease;
+        position: relative;
+      }
+
+      .top-header-right a::after {
+        content: '';
+        position: absolute;
+        bottom: -3px;
+        left: 0;
+        width: 0;
+        height: 1px;
+        background: var(--sequoia-green);
+        transition: width 0.3s ease;
+      }
+
+      .top-header-right a:hover::after {
+        width: 100%;
+      }
+
+      .top-header-right a:hover {
+        color: var(--sequoia-green);
+      }
+
+      .cart-icon {
+        position: relative;
+        font-size: 20px;
+        margin-left: 10px;
+      }
+
+      .cart-count {
+        position: absolute;
+        top: -8px;
+        right: -8px;
+        background: var(--wildflower-coral);
+        color: white;
+        border-radius: 50%;
+        width: 20px;
+        height: 20px;
+        font-size: 11px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 600;
+      }
+
+      /* Sub Header */
+      .sub-header {
+        padding: 18px 0;
+        background: rgba(255, 255, 255, 0.95);
+      }
+
+      .sub-header-container {
+        max-width: 1600px;
+        margin: 0 auto;
+        padding: 0 30px;
+        display: flex;
+        justify-content: center;
+        gap: 50px;
+      }
+
+      .sub-header a {
+        color: var(--charcoal);
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 15px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        position: relative;
+        transition: all 0.3s ease;
+        padding: 8px 0;
+      }
+
+      .sub-header a::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 0;
+        height: 3px;
+        background: var(--sequoia-green);
+        transition: width 0.3s ease;
+      }
+
+      .sub-header a:hover::after {
+        width: 100%;
+      }
+
+      .sub-header a:hover {
+        color: var(--sequoia-green);
+      }
+
+      /* Mobile Menu */
+      .mobile-menu-btn {
+        display: none;
+        flex-direction: column;
+        gap: 4px;
+        cursor: pointer;
+        padding: 8px;
+      }
+
+      .mobile-menu-btn span {
+        width: 25px;
+        height: 2px;
+        background: var(--charcoal);
+        border-radius: 2px;
+        transition: all 0.3s ease;
+      }
+
+      /* Responsive */
+      @media (max-width: 1200px) {
+        .sub-header-container {
+          gap: 35px;
+        }
+        
+        .search-bar {
+          width: 220px;
+        }
+        
+        .search-bar:focus {
+          width: 260px;
+        }
+      }
+
+      @media (max-width: 1024px) {
+        .top-header-container {
+          grid-template-columns: auto 1fr auto;
+          gap: 20px;
+        }
+        
+        .search-bar {
+          width: 180px;
+        }
+        
+        .search-bar:focus {
+          width: 200px;
+        }
+        
+        .sub-header-container {
+          gap: 25px;
+          flex-wrap: wrap;
+        }
+        
+        .sub-header a {
+          font-size: 14px;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .header-wrapper {
+          position: relative;
+        }
+        
+        .top-header-container {
+          display: flex;
+          justify-content: space-between;
+          padding: 0 20px;
+        }
+        
+        .top-header-left {
+          order: 2;
+        }
+        
+        .logo {
+          order: 1;
+          font-size: 32px;
+        }
+        
+        .top-header-right {
+          order: 3;
+          gap: 15px;
+        }
+        
+        .search-container {
+          display: none;
+        }
+        
+        .sub-header {
+          display: none;
+        }
+        
+        .mobile-menu-btn {
+          display: flex;
+          order: 4;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .top-header-right a:not(.cart-icon) {
+          display: none;
+        }
+        
+        .logo {
+          font-size: 28px;
+        }
+      }
+
+      /* Hero Section */
+      .hero {
+        min-height: 90vh;
+        display: flex;
+        align-items: center;
+        padding: 160px 0 60px;
+        background: linear-gradient(135deg, rgba(251, 249, 244, 0.9) 0%, rgba(156, 175, 136, 0.1) 100%);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .hero::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        right: -10%;
+        width: 60%;
+        height: 120%;
+        background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1000 1000'%3E%3Cpath d='M200,300 Q400,100 600,300 T1000,300 L1000,1000 L0,1000 Z' fill='%23E07A5F' fill-opacity='0.03'/%3E%3C/svg%3E") no-repeat;
+        background-size: cover;
+        transform: rotate(15deg);
+      }
+
+      .hero-content {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 80px;
+        align-items: center;
+        position: relative;
+        z-index: 2;
+      }
+
+      .hero-text h1 {
+        font-family: 'Playfair Display', serif;
+        font-size: clamp(3rem, 6vw, 4.5rem);
+        font-weight: 700;
+        line-height: 1.1;
+        margin-bottom: 24px;
+        color: var(--charcoal);
+      }
+
+      .hero-text .highlight {
+        background: var(--sunset-gradient);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      .hero-text p {
+        font-size: 20px;
+        color: var(--warm-gray);
+        margin-bottom: 40px;
+        line-height: 1.7;
+      }
+
+      .hero-ctas {
+        display: flex;
+        gap: 20px;
+        flex-wrap: wrap;
+      }
+
+      .btn-primary {
+        background: var(--yosemite-gradient);
+        color: white;
+        padding: 16px 32px;
+        border: none;
+        border-radius: 50px;
+        font-weight: 600;
+        font-size: 16px;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        box-shadow: 0 8px 25px rgba(74, 103, 65, 0.3);
+        cursor: pointer;
+      }
+
+      .btn-primary:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 15px 35px rgba(74, 103, 65, 0.4);
+      }
+
+      .btn-secondary {
+        background: transparent;
+        color: var(--charcoal);
+        padding: 16px 32px;
+        border: 2px solid var(--meadow-sage);
+        border-radius: 50px;
+        font-weight: 600;
+        font-size: 16px;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        transition: all 0.3s ease;
+        cursor: pointer;
+      }
+
+      .btn-secondary:hover {
+        background: var(--meadow-sage);
+        color: white;
+        transform: translateY(-2px);
+      }
+
+      .hero-image {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .hero-image::before {
+        content: '';
+        position: absolute;
+        width: 400px;
+        height: 400px;
+        background: var(--granite-gradient);
+        border-radius: 50%;
+        opacity: 0.1;
+        animation: float 6s ease-in-out infinite;
+      }
+
+      /* Product Grid - Main Focus */
+      .products-main {
+        padding: 80px 0;
+        background: var(--pure-white);
+      }
+
+      .products-header {
+        text-align: center;
+        margin-bottom: 60px;
+      }
+
+      .products-header h2 {
+        font-family: 'Playfair Display', serif;
+        font-size: clamp(2.5rem, 5vw, 3.5rem);
+        font-weight: 700;
+        margin-bottom: 20px;
+        color: var(--charcoal);
+      }
+
+      .collection-tabs {
+        display: flex;
+        justify-content: center;
+        gap: 40px;
+        margin-bottom: 50px;
+        flex-wrap: wrap;
+      }
+
+      .tab-btn {
+        background: none;
+        border: none;
+        padding: 12px 24px;
+        font-size: 16px;
+        font-weight: 600;
+        color: var(--warm-gray);
+        cursor: pointer;
+        position: relative;
+        transition: all 0.3s ease;
+      }
+
+      .tab-btn.active {
+        color: var(--sequoia-green);
+      }
+
+      .tab-btn::after {
+        content: '';
+        position: absolute;
+        bottom: -8px;
+        left: 0;
+        width: 0;
+        height: 3px;
+        background: var(--sequoia-green);
+        transition: width 0.3s ease;
+      }
+
+      .tab-btn.active::after {
+        width: 100%;
+      }
+
+      .products-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 30px;
+        margin-bottom: 60px;
+      }
+
+      .product-card {
+        background: var(--pure-white);
+        border-radius: 15px;
+        overflow: hidden;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        box-shadow: 0 8px 25px rgba(44, 62, 80, 0.06);
+        cursor: pointer;
+      }
+
+      .product-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 20px 40px rgba(44, 62, 80, 0.12);
+      }
+
+      .product-image {
+        height: 350px;
+        background: var(--valley-mist);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .product-badge {
+        position: absolute;
+        top: 15px;
+        left: 15px;
+        background: var(--wildflower-coral);
+        color: white;
+        padding: 5px 12px;
+        border-radius: 15px;
+        font-size: 12px;
+        font-weight: 600;
+      }
+
+      .product-info {
+        padding: 25px;
+      }
+
+      .product-info h3 {
+        font-size: 20px;
+        font-weight: 700;
+        margin-bottom: 8px;
+        color: var(--charcoal);
+      }
+
+      .product-category {
+        font-size: 14px;
+        color: var(--warm-gray);
+        margin-bottom: 12px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+      }
+
+      .product-price {
+        font-size: 22px;
+        font-weight: 700;
+        color: var(--sequoia-green);
+        margin-bottom: 15px;
+      }
+
+      .product-features {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+      }
+
+      .feature-tag {
+        background: var(--meadow-sage);
+        color: white;
+        padding: 4px 10px;
+        border-radius: 12px;
+        font-size: 11px;
+        font-weight: 500;
+      }
+
+      /* Collections Section */
+      .collections-section {
+        padding: 80px 0;
+        background: var(--valley-mist);
+      }
+
+      .collections-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+        gap: 40px;
+      }
+
+      .collection-card {
+        background: var(--pure-white);
+        border-radius: 20px;
+        overflow: hidden;
+        box-shadow: 0 15px 40px rgba(44, 62, 80, 0.08);
+        transition: all 0.3s ease;
+      }
+
+      .collection-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 20px 50px rgba(44, 62, 80, 0.15);
+      }
+
+      .collection-image {
+        height: 250px;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .collection-overlay {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: linear-gradient(transparent, rgba(0,0,0,0.7));
+        color: white;
+        padding: 30px 25px 25px;
+      }
+
+      .collection-title {
+        font-size: 24px;
+        font-weight: 700;
+        margin-bottom: 8px;
+      }
+
+      .collection-description {
+        font-size: 14px;
+        opacity: 0.9;
+      }
+
+      /* Impact Section */
+      .impact-section {
+        padding: 100px 0;
+        background: var(--alpine-lake);
+        color: white;
+        position: relative;
+      }
+
+      .impact-content {
+        text-align: center;
+      }
+
+      .impact-content h2 {
+        font-family: 'Playfair Display', serif;
+        font-size: clamp(2.5rem, 5vw, 3.5rem);
+        font-weight: 700;
+        margin-bottom: 30px;
+      }
+
+      .impact-content p {
+        font-size: 20px;
+        margin-bottom: 50px;
+        opacity: 0.9;
+        max-width: 800px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .impact-stats {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 40px;
+        margin-top: 60px;
+      }
+
+      .stat-item {
+        text-align: center;
+      }
+
+      .stat-number {
+        font-size: 3rem;
+        font-weight: 800;
+        display: block;
+        margin-bottom: 10px;
+      }
+
+      .stat-label {
+        font-size: 14px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        opacity: 0.8;
+      }
+
+      /* Email Signup */
+      .signup-section {
+        padding: 100px 0;
+        background: var(--cream);
+      }
+
+      .signup-container {
+        max-width: 700px;
+        margin: 0 auto;
+        text-align: center;
+        background: var(--pure-white);
+        padding: 60px 50px;
+        border-radius: 25px;
+        box-shadow: 0 20px 60px rgba(44, 62, 80, 0.08);
+      }
+
+      .signup-container h2 {
+        font-family: 'Playfair Display', serif;
+        font-size: clamp(2rem, 4vw, 2.8rem);
+        font-weight: 700;
+        margin-bottom: 20px;
+        color: var(--charcoal);
+      }
+
+      .signup-form {
+        display: flex;
+        gap: 15px;
+        max-width: 450px;
+        margin: 40px auto 0;
+      }
+
+      .email-input {
+        flex: 1;
+        padding: 16px 20px;
+        border: 2px solid rgba(138, 141, 143, 0.3);
+        border-radius: 50px;
+        font-size: 16px;
+        transition: all 0.3s ease;
+        background: var(--valley-mist);
+      }
+
+      .email-input:focus {
+        outline: none;
+        border-color: var(--sequoia-green);
+        box-shadow: 0 0 0 4px rgba(74, 103, 65, 0.1);
+      }
+
+      .signup-btn {
+        background: var(--sunset-gradient);
+        color: white;
+        padding: 16px 32px;
+        border: none;
+        border-radius: 50px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        white-space: nowrap;
+      }
+
+      .signup-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 25px rgba(224, 122, 95, 0.3);
+      }
+
+      /* Footer */
+      footer {
+        background: var(--charcoal);
+        color: white;
+        padding: 80px 0 40px;
+      }
+
+      .footer-content {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 40px;
+        margin-bottom: 40px;
+      }
+
+      .footer-section h3 {
+        font-size: 18px;
+        font-weight: 700;
+        margin-bottom: 20px;
+        color: var(--meadow-sage);
+      }
+
+      .footer-section ul {
+        list-style: none;
+      }
+
+      .footer-section ul li {
+        margin-bottom: 10px;
+      }
+
+      .footer-section ul li a {
+        color: rgba(255, 255, 255, 0.8);
+        text-decoration: none;
+        transition: color 0.3s ease;
+      }
+
+      .footer-section ul li a:hover {
+        color: var(--meadow-sage);
+      }
+
+      .footer-bottom {
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        padding-top: 30px;
+        text-align: center;
+        color: rgba(255, 255, 255, 0.6);
+      }
+
+      /* Animations */
+      @keyframes float {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-20px); }
+      }
+
+      /* Responsive */
+      @media (max-width: 768px) {
+        .hero-content {
+          grid-template-columns: 1fr;
+          gap: 40px;
+          text-align: center;
+        }
+
+        .hero-ctas {
+          justify-content: center;
+        }
+
+        .signup-form {
+          flex-direction: column;
+        }
+
+        .products-grid {
+          grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        }
+
+        .collections-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .collection-tabs {
+          gap: 20px;
+        }
+      }
+    </style>
+</head>
+
+<body>
+    <!-- Two-Tier Navigation -->
+    <div class="header-wrapper" id="header">
+      <!-- Top Header -->
+      <div class="top-header">
+        <div class="top-header-container">
+          <div class="top-header-left">
+            <div class="search-container">
+              <input type="text" class="search-bar" placeholder="Search products...">
+              <span class="search-icon">🔍</span>
+            </div>
+          </div>
+          
+          <div class="logo">TUALMI</div>
+          
+          <div class="top-header-right">
+            <a href="#impact">Our Mission</a>
+            <a href="#about">About</a>
+            <a href="#account">Account</a>
+            <a href="#cart" class="cart-icon">
+              🛒
+              <span class="cart-count">2</span>
+            </a>
+          </div>
+          
+          <div class="mobile-menu-btn">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Sub Header -->
+      <div class="sub-header">
+        <div class="sub-header-container">
+          <a href="#bestsellers">New Arrivals</a>
+          <a href="#collections">Collections</a>
+          <a href="#jackets">Jackets</a>
+          <a href="#bottoms">Bottoms</a>
+          <a href="#layers">Base Layers</a>
+          <a href="#accessories">Accessories</a>
+          <a href="#sale">Sale</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+      <div class="container">
+        <div class="hero-content">
+          <div class="hero-text">
+            <h1>Inspired by <span class="highlight">Yosemite's</span> eternal <span class="highlight">beauty</span></h1>
+            <p>Sustainable outdoor fashion designed for women who find strength in nature. Every piece honors the wilderness that shapes us, while empowering the next generation of adventurers.</p>
+            <div class="hero-ctas">
+              <a href="#bestsellers" class="btn-primary">Shop Collection</a>
+              <a href="#impact" class="btn-secondary">Our Mission</a>
+            </div>
+          </div>
+          <div class="hero-image">
+            <div style="width: 100%; max-width: 500px; height: 600px; background: linear-gradient(45deg, var(--sequoia-green), var(--sunset-granite)); border-radius: 20px; display: flex; align-items: center; justify-content: center; color: white; font-size: 18px; text-align: center;">
+              Yosemite-inspired outdoor fashion hero image
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Main Products Section -->
+    <section id="bestsellers" class="products-main">
+      <div class="container">
+        <div class="products-header">
+          <h2>Shop by Collection</h2>
+        </div>
+        
+        <div class="collection-tabs">
+          <button class="tab-btn active">Bestsellers</button>
+          <button class="tab-btn">New Arrivals</button>
+          <button class="tab-btn">Summit Series</button>
+          <button class="tab-btn">Valley Collection</button>
+        </div>
+        
+        <div class="products-grid">
+          <div class="product-card">
+            <div class="product-image" style="background: linear-gradient(45deg, var(--alpine-lake), var(--meadow-sage)); display: flex; align-items: center; justify-content: center; color: white; font-weight: 600;">
+              Half Dome Shell
+              <div class="product-badge">Bestseller</div>
+            </div>
+            <div class="product-info">
+              <div class="product-category">Jackets</div>
+              <h3>Half Dome Shell Jacket</h3>
+              <div class="product-price">$298</div>
+              <div class="product-features">
+                <span class="feature-tag">Recycled</span>
+                <span class="feature-tag">Waterproof</span>
+                <span class="feature-tag">Packable</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="product-card">
+            <div class="product-image" style="background: linear-gradient(45deg, var(--sunset-granite), var(--wildflower-coral)); display: flex; align-items: center; justify-content: center; color: white; font-weight: 600;">
+              Valley Leggings
+              <div class="product-badge">New</div>
+            </div>
+            <div class="product-info">
+              <div class="product-category">Bottoms</div>
+              <h3>Valley High-Rise Leggings</h3>
+              <div class="product-price">$128</div>
+              <div class="product-features">
+                <span class="feature-tag">Stretch</span>
+                <span class="feature-tag">UV Protection</span>
+                <span class="feature-tag">Quick-Dry</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="product-card">
+            <div class="product-image" style="background: linear-gradient(45deg, var(--granite-gray), var(--half-dome-stone)); display: flex; align-items: center; justify-content: center; color: white; font-weight: 600;">
+              Merino Base Layer
+            </div>
+            <div class="product-info">
+              <div class="product-category">Base Layers</div>
+              <h3>Granite Merino Long Sleeve</h3>
+              <div class="product-price">$98</div>
+              <div class="product-features">
+                <span class="feature-tag">Merino Wool</span>
+                <span class="feature-tag">Ethical</span>
+                <span class="feature-tag">Odor-Free</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="product-card">
+            <div class="product-image" style="background: linear-gradient(45deg, var(--sequoia-green), var(--alpine-lake)); display: flex; align-items: center; justify-content: center; color: white; font-weight: 600;">
+              Trail Shorts
+            </div>
+            <div class="product-info">
+              <div class="product-category">Bottoms</div>
+              <h3>Sequoia Trail Shorts</h3>
+              <div class="product-price">$89</div>
+              <div class="product-features">
+                <span class="feature-tag">Lightweight</span>
+                <span class="feature-tag">Pockets</span>
+                <span class="feature-tag">UPF 50+</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="product-card">
+            <div class="product-image" style="background: linear-gradient(45deg, var(--wildflower-coral), var(--sunset-granite)); display: flex; align-items: center; justify-content: center; color: white; font-weight: 600;">
+              Fleece Vest
+            </div>
+            <div class="product-info">
+              <div class="product-category">Layers</div>
+              <h3>Meadow Fleece Vest</h3>
+              <div class="product-price">$158</div>
+              <div class="product-features">
+                <span class="feature-tag">Recycled Fleece</span>
+                <span class="feature-tag">Windproof</span>
+                <span class="feature-tag">Packable</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="product-card">
+            <div class="product-image" style="background: linear-gradient(45deg, var(--half-dome-stone), var(--granite-gray)); display: flex; align-items: center; justify-content: center; color: white; font-weight: 600;">
+              Hiking Pants
+            </div>
+            <div class="product-info">
+              <div class="product-category">Bottoms</div>
+              <h3>Granite Peak Hiking Pants</h3>
+              <div class="product-price">$148</div>
+              <div class="product-features">
+                <span class="feature-tag">Stretch</span>
+                <span class="feature-tag">Water-Resistant</span>
+                <span class="feature-tag">Articulated</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Collections Showcase -->
+    <section id="collections" class="collections-section">
+      <div class="container">
+        <div class="products-header">
+          <h2>Explore Our Collections</h2>
+        </div>
+        
+        <div class="collections-grid">
+          <div class="collection-card">
+            <div class="collection-image" style="background: linear-gradient(135deg, var(--sequoia-green) 0%, var(--alpine-lake) 100%);">
+              <div class="collection-overlay">
+                <div class="collection-title">Summit Series</div>
+                <div class="collection-description">Technical alpine gear for peak performance</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="collection-card">
+            <div class="collection-image" style="background: linear-gradient(135deg, var(--sunset-granite) 0%, var(--wildflower-coral) 100%);">
+              <div class="collection-overlay">
+                <div class="collection-title">Valley Collection</div>
+                <div class="collection-description">Everyday outdoor style with feminine details</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="collection-card">
+            <div class="collection-image" style="background: linear-gradient(135deg, var(--granite-gray) 0%, var(--half-dome-stone) 100%);">
+              <div class="collection-overlay">
+                <div class="collection-title">Granite Essentials</div>
+                <div class="collection-description">Timeless base layers and everyday pieces</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Impact Section -->
+    <section id="impact" class="impact-section">
+      <div class="container">
+        <div class="impact-content">
+          <h2>Protecting Yosemite's Legacy</h2>
+          <p>15% of every purchase supports organizations getting women and people of color outdoors, while preserving the wild places that inspire us.</p>
+          
+          <div class="impact-stats">
+            <div class="stat-item">
+              <span class="stat-number">15%</span>
+              <div class="stat-label">Profits Donated</div>
+            </div>
+            <div class="stat-item">
+              <span class="stat-number">50K+</span>
+              <div class="stat-label">Women Empowered</div>
+            </div>
+            <div class="stat-item">
+              <span class="stat-number">100%</span>
+              <div class="stat-label">Sustainable Materials</div>
+            </div>
+            <div class="stat-item">
+              <span class="stat-number">Carbon</span>
+              <div class="stat-label">Negative by 2025</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Email Signup -->
+    <section id="signup" class="signup-section">
+      <div class="container">
+        <div class="signup-container">
+          <h2>Join the Tualmi Community</h2>
+          <p>Be the first to discover new collections and exclusive stories from Yosemite</p>
+          
+          <form class="signup-form" onsubmit="handleSubmit(event)">
+            <input 
+              type="email" 
+              placeholder="Enter your email" 
+              required 
+              class="email-input"
+              id="email-input"
+            />
+            <button type="submit" class="signup-btn">Subscribe</button>
+          </form>
+
+          <div id="success-message" style="display: none; margin-top: 30px; padding: 20px; background: var(--meadow-sage); color: white; border-radius: 15px;">
+            🎉 Welcome to Tualmi! Check your email for exclusive early access.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <div class="container">
+        <div class="footer-content">
+          <div class="footer-section">
+            <h3>Shop</h3>
+            <ul>
+              <li><a href="#">New Arrivals</a></li>
+              <li><a href="#">Jackets & Shells</a></li>
+              <li><a href="#">Base Layers</a></li>
+              <li><a href="#">Hiking Bottoms</a></li>
+              <li><a href="#">Accessories</a></li>
+              <li><a href="#">Gift Cards</a></li>
+            </ul>
+          </div>
+          <div class="footer-section">
+            <h3>Company</h3>
+            <ul>
+              <li><a href="#">Our Story</a></li>
+              <li><a href="#">Sustainability</a></li>
+              <li><a href="#">Impact Report</a></li>
+              <li><a href="#">Careers</a></li>
+              <li><a href="#">Press</a></li>
+            </ul>
+          </div>
+          <div class="footer-section">
+            <h3>Support</h3>
+            <ul>
+              <li><a href="#">Size Guide</a></li>
+              <li><a href="#">Care Instructions</a></li>
+              <li><a href="#">Returns & Exchanges</a></li>
+              <li><a href="#">Shipping</a></li>
+              <li><a href="#">Contact Us</a></li>
+            </ul>
+          </div>
+          <div class="footer-section">
+            <h3>Connect</h3>
+            <ul>
+              <li><a href="#">Instagram</a></li>
+              <li><a href="#">TikTok</a></li>
+              <li><a href="#">Community Forum</a></li>
+              <li><a href="#">Newsletter</a></li>
+              <li><a href="#">Ambassador Program</a></li>
+            </ul>
+          </div>
+        </div>
+        
+        <div class="footer-bottom">
+          <p>&copy; 2024 Tualmi. Inspired by Yosemite, designed for adventure. | Made with 💚 for the planet.</p>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      // Email signup
+      function handleSubmit(e) {
+        e.preventDefault();
+        const email = document.getElementById('email-input').value;
+        const successMsg = document.getElementById('success-message');
+        
+        successMsg.style.display = 'block';
+        e.target.reset();
+        
+        setTimeout(() => {
+          successMsg.style.display = 'none';
+        }, 5000);
+        
+        console.log('Tualmi signup:', { email });
+      }
+
+      // Header scroll effect
+      window.addEventListener('scroll', function() {
+        const header = document.getElementById('header');
+        if (window.scrollY > 50) {
+          header.classList.add('scrolled');
+        } else {
+          header.classList.remove('scrolled');
+        }
+      });
+
+      // Collection tabs
+      document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+        });
+      });
+
+      // Search functionality
+      document.querySelector('.search-bar').addEventListener('focus', function() {
+        console.log('Search activated');
+      });
+
+      // Smooth scroll for navigation
+      document.addEventListener('DOMContentLoaded', () => {
+        const links = document.querySelectorAll('a[href^="#"]');
+        links.forEach(link => {
+          link.addEventListener('click', (e) => {
+            const href = link.getAttribute('href');
+            if (href !== '#') {
+              e.preventDefault();
+              const target = document.querySelector(href);
+              if (target) {
+                const offset = 100;
+                const position = target.offsetTop - offset;
+                window.scrollTo({
+                  top: position,
+                  behavior: 'smooth'
+                });
+              }
+            }
+          });
+        });
+      });
+    </script>
+</body>
+</html>

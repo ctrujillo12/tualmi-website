@@ -1,0 +1,688 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout>
+  <style>
+    /* Hero Section */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 120px 20px 80px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.133 7-7s-3.134-7-7-7-7 3.133-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.133 7-7s-3.134-7-7-7-7 3.133-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23ffffff' fill-opacity='0.05' fill-rule='evenodd'/%3E%3C/svg%3E");
+      animation: float-bg 20s ease-in-out infinite;
+    }
+
+    @keyframes float-bg {
+      0%, 100% { transform: translate(0, 0); }
+      50% { transform: translate(-20px, -20px); }
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      max-width: 900px;
+      animation: fadeInUp 1s ease;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.5rem, 8vw, 5rem);
+      font-weight: 800;
+      color: white;
+      margin-bottom: 24px;
+      line-height: 1.1;
+      font-family: 'Playfair Display', serif;
+      text-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .hero h1 span {
+      background: linear-gradient(120deg, #fff, #f0e6ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero p {
+      font-size: clamp(1.1rem, 3vw, 1.4rem);
+      color: rgba(255, 255, 255, 0.95);
+      margin-bottom: 40px;
+      font-weight: 400;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .hero-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      background: white;
+      color: var(--primary);
+      padding: 18px 36px;
+      border-radius: 50px;
+      font-weight: 600;
+      font-size: 18px;
+      text-decoration: none;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+      animation: pulse 2s infinite;
+    }
+
+    .hero-cta:hover {
+      transform: translateY(-3px) scale(1.05);
+      box-shadow: 0 15px 50px rgba(0, 0, 0, 0.3);
+    }
+
+    .hero-cta svg {
+      width: 20px;
+      height: 20px;
+    }
+
+    /* Trust Badges */
+    .trust-badges {
+      margin-top: 60px;
+      display: flex;
+      gap: 30px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .trust-badge {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      padding: 12px 24px;
+      border-radius: 50px;
+      color: white;
+      font-size: 14px;
+      font-weight: 500;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    /* Stats Section */
+    .stats-section {
+      padding: 100px 20px;
+      background: white;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+
+    .section-header h2 {
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 800;
+      margin-bottom: 20px;
+      background: var(--gradient-1);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .section-header p {
+      font-size: 18px;
+      color: var(--text-light);
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .stat-card {
+      background: linear-gradient(135deg, rgba(139, 92, 246, 0.05) 0%, rgba(236, 72, 153, 0.05) 100%);
+      border: 2px solid rgba(139, 92, 246, 0.1);
+      padding: 40px 30px;
+      border-radius: 20px;
+      text-align: center;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .stat-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: var(--gradient-1);
+      transform: scaleX(0);
+      transition: transform 0.3s ease;
+    }
+
+    .stat-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 20px 40px rgba(139, 92, 246, 0.15);
+    }
+
+    .stat-card:hover::before {
+      transform: scaleX(1);
+    }
+
+    .stat-number {
+      font-size: 3.5rem;
+      font-weight: 800;
+      background: var(--gradient-1);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 15px;
+      display: block;
+    }
+
+    .stat-text {
+      font-size: 16px;
+      color: var(--text-light);
+      line-height: 1.6;
+    }
+
+    /* How It Works */
+    .how-section {
+      padding: 100px 20px;
+      background: var(--bg-light);
+    }
+
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 40px;
+      max-width: 1000px;
+      margin: 60px auto 0;
+    }
+
+    .step-card {
+      text-align: center;
+      position: relative;
+    }
+
+    .step-icon {
+      width: 80px;
+      height: 80px;
+      margin: 0 auto 20px;
+      background: var(--gradient-1);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 36px;
+      box-shadow: 0 10px 30px rgba(139, 92, 246, 0.2);
+    }
+
+    .step-card h3 {
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 12px;
+      color: var(--text-dark);
+    }
+
+    .step-card p {
+      color: var(--text-light);
+      line-height: 1.6;
+    }
+
+    /* Email Signup Section */
+    .signup-section {
+      padding: 120px 20px;
+      background: white;
+      position: relative;
+    }
+
+    .signup-container {
+      max-width: 800px;
+      margin: 0 auto;
+      text-align: center;
+      background: linear-gradient(135deg, rgba(139, 92, 246, 0.05) 0%, rgba(236, 72, 153, 0.05) 100%);
+      padding: 80px 40px;
+      border-radius: 30px;
+      border: 2px solid rgba(139, 92, 246, 0.1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .signup-container::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(139, 92, 246, 0.1) 0%, transparent 70%);
+      animation: rotate 30s linear infinite;
+    }
+
+    @keyframes rotate {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    .signup-content {
+      position: relative;
+      z-index: 1;
+    }
+
+    .signup-container h2 {
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 800;
+      margin-bottom: 20px;
+      background: var(--gradient-1);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .signup-container .subtitle {
+      font-size: 20px;
+      color: var(--text-light);
+      margin-bottom: 50px;
+    }
+
+    .signup-form {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+
+    .form-input {
+      padding: 18px 24px;
+      border: 2px solid rgba(139, 92, 246, 0.2);
+      border-radius: 50px;
+      font-size: 16px;
+      transition: all 0.3s ease;
+      background: white;
+      color: var(--text-dark);
+    }
+
+    .form-input:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 4px rgba(139, 92, 246, 0.1);
+    }
+
+    .form-input::placeholder {
+      color: var(--text-light);
+    }
+
+    .submit-btn {
+      background: var(--gradient-1);
+      color: white;
+      padding: 18px 40px;
+      border: none;
+      border-radius: 50px;
+      font-size: 18px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: 0 10px 30px rgba(139, 92, 246, 0.3);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .submit-btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+      transition: left 0.5s ease;
+    }
+
+    .submit-btn:hover::before {
+      left: 100%;
+    }
+
+    .submit-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 15px 40px rgba(139, 92, 246, 0.4);
+    }
+
+    .privacy-note {
+      margin-top: 30px;
+      font-size: 14px;
+      color: var(--text-light);
+    }
+
+    .privacy-note a {
+      color: var(--primary);
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    /* Success Message */
+    .success-message {
+      display: none;
+      background: linear-gradient(135deg, #10b981 0%, #14b8a6 100%);
+      color: white;
+      padding: 20px 30px;
+      border-radius: 15px;
+      margin-top: 30px;
+      animation: fadeInUp 0.5s ease;
+    }
+
+    .success-message.show {
+      display: block;
+    }
+
+    /* About Section */
+    .about-section {
+      padding: 100px 20px;
+      background: white;
+    }
+
+    .about-content {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .about-content h2 {
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 800;
+      margin-bottom: 30px;
+      background: var(--gradient-1);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-align: center;
+    }
+
+    .about-content p {
+      font-size: 18px;
+      line-height: 1.8;
+      color: var(--text-light);
+      margin-bottom: 24px;
+    }
+
+    .about-features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+      margin-top: 50px;
+    }
+
+    .feature {
+      padding: 30px;
+      background: var(--bg-light);
+      border-radius: 15px;
+      text-align: center;
+    }
+
+    .feature-icon {
+      font-size: 40px;
+      margin-bottom: 15px;
+    }
+
+    .feature h3 {
+      font-size: 20px;
+      font-weight: 600;
+      margin-bottom: 10px;
+      color: var(--text-dark);
+    }
+
+    .feature p {
+      color: var(--text-light);
+      font-size: 15px;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .hero {
+        padding: 100px 20px 60px;
+      }
+
+      .trust-badges {
+        gap: 15px;
+      }
+
+      .signup-container {
+        padding: 60px 30px;
+      }
+
+      .stats-grid,
+      .steps-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+
+  <!-- Hero Section -->
+  <section id="home" class="hero">
+    <div class="hero-content">
+      <h1>Your Health Data.<br/><span>Her Better Future.</span></h1>
+      <p>Join 50,000+ women revolutionizing healthcare research with their wearable device data</p>
+      <a href="#signup" class="hero-cta">
+        Get Early Access
+        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+        </svg>
+      </a>
+      <div class="trust-badges">
+        <div class="trust-badge">🔒 100% Anonymous</div>
+        <div class="trust-badge">🏥 IRB Approved</div>
+        <div class="trust-badge">✨ HIPAA Compliant</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Problem Stats -->
+  <section class="stats-section animate-on-scroll">
+    <div class="container">
+      <div class="section-header">
+        <h2>The Gender Health Gap is Real</h2>
+        <p>For too long, women's health has been an afterthought in medical research</p>
+      </div>
+      <div class="stats-grid">
+        <div class="stat-card">
+          <span class="stat-number">8 years</span>
+          <div class="stat-text">Average delay for women to receive an accurate diagnosis for conditions like endometriosis</div>
+        </div>
+        <div class="stat-card">
+          <span class="stat-number">70%</span>
+          <div class="stat-text">Of medications have never been tested for sex-specific differences in dosing</div>
+        </div>
+        <div class="stat-card">
+          <span class="stat-number">2x</span>
+          <div class="stat-text">More likely for women's pain symptoms to be dismissed as psychological</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How It Works -->
+  <section id="how" class="how-section animate-on-scroll">
+    <div class="container">
+      <div class="section-header">
+        <h2>How Your Data Makes a Difference</h2>
+        <p>Three simple steps to join the movement</p>
+      </div>
+      <div class="steps-grid">
+        <div class="step-card">
+          <div class="step-icon">1</div>
+          <h3>Connect Your Device</h3>
+          <p>Securely sync your Fitbit, Apple Watch, or other wearable device</p>
+        </div>
+        <div class="step-card">
+          <div class="step-icon">2</div>
+          <h3>Share Anonymously</h3>
+          <p>Your data is encrypted and anonymized to protect your privacy</p>
+        </div>
+        <div class="step-card">
+          <div class="step-icon">3</div>
+          <h3>Drive Research</h3>
+          <p>Contribute to groundbreaking studies on women's health conditions</p>
+        </div>
+        <div class="step-card">
+          <div class="step-icon">4</div>
+          <h3>See Impact</h3>
+          <p>Get updates on research breakthroughs your data helped achieve</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Email Signup -->
+  <section id="signup" class="signup-section animate-on-scroll">
+    <div class="container">
+      <div class="signup-container">
+        <div class="signup-content">
+          <h2>Be Part of the Solution</h2>
+          <p class="subtitle">Get early access and exclusive updates on our research findings</p>
+          
+          <form class="signup-form" onsubmit="handleSubmit(event)">
+            <input 
+              type="email" 
+              placeholder="Enter your email address" 
+              required 
+              class="form-input"
+              id="email-input"
+            />
+            <select required class="form-input" id="device-select">
+              <option value="">Which wearable do you use?</option>
+              <option value="apple-watch">Apple Watch</option>
+              <option value="fitbit">Fitbit</option>
+              <option value="garmin">Garmin</option>
+              <option value="oura">Oura Ring</option>
+              <option value="whoop">WHOOP</option>
+              <option value="samsung">Samsung Galaxy Watch</option>
+              <option value="other">Other Device</option>
+              <option value="none">Planning to Get One</option>
+            </select>
+            <button type="submit" class="submit-btn">
+              Join 50,000+ Women Making History
+            </button>
+          </form>
+
+          <div id="success-message" class="success-message">
+            🎉 Welcome to the movement! Check your email for next steps.
+          </div>
+
+          <p class="privacy-note">
+            We respect your privacy. Your data is encrypted and will never be sold. 
+            <a href="#">Learn more about our privacy practices</a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Impact Section -->
+  <section id="impact" class="about-section animate-on-scroll">
+    <div class="container">
+      <div class="about-content">
+        <h2>Your Impact Matters</h2>
+        <p>
+          When you share your health data, you're not just contributing numbers – you're helping 
+          researchers understand patterns that have been invisible for decades. Your heart rate 
+          variability, sleep patterns, and activity levels reveal insights that could lead to 
+          better treatments for millions of women.
+        </p>
+        
+        <div class="about-features">
+          <div class="feature">
+            <div class="feature-icon">🔬</div>
+            <h3>Research-Driven</h3>
+            <p>Partner with leading universities and research institutions worldwide</p>
+          </div>
+          <div class="feature">
+            <div class="feature-icon">🛡️</div>
+            <h3>Privacy-First</h3>
+            <p>Bank-level encryption and complete anonymization of all data</p>
+          </div>
+          <div class="feature">
+            <div class="feature-icon">📊</div>
+            <h3>Real Results</h3>
+            <p>Track the impact of your contribution through regular research updates</p>
+          </div>
+          <div class="feature">
+            <div class="feature-icon">🌍</div>
+            <h3>Global Movement</h3>
+            <p>Join women from 42 countries working together for change</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Section (Hidden by default) -->
+  <section id="about" class="about-section page">
+    <div class="container">
+      <div class="about-content">
+        <h2>About the Mission</h2>
+        <p>
+          Women make up 51% of the population, yet medical research has historically excluded 
+          female participants. This has led to a dangerous knowledge gap in understanding how 
+          diseases, treatments, and medications affect women differently than men.
+        </p>
+        <p>
+          Your wearable device collects valuable health data every day. When aggregated anonymously 
+          across thousands of women, it can reveal patterns and insights that have never been 
+          studied before. From understanding how menstrual cycles affect chronic conditions to 
+          discovering early warning signs of heart disease in women, your data is invaluable.
+        </p>
+        <p>
+          We partner with leading research institutions to ensure your data drives meaningful 
+          change. Every participant receives regular updates on the studies they're contributing 
+          to and the breakthroughs being made.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <script type="text/javascript">
+    function handleSubmit(e) {
+      e.preventDefault();
+      
+      const email = document.getElementById('email-input').value;
+      const device = document.getElementById('device-select').value;
+      
+      // Show success message
+      const successMsg = document.getElementById('success-message');
+      successMsg.classList.add('show');
+      
+      // Clear form
+      e.target.reset();
+      
+      // Hide success message after 5 seconds
+      setTimeout(() => {
+        successMsg.classList.remove('show');
+      }, 5000);
+      
+      // Here you would normally send the data to your backend
+      console.log('Signup submitted:', { email, device });
+    }
+
+    function showPage(pageId) {
+      document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+      const page = document.getElementById(pageId);
+      if (page) {
+        page.classList.add('active');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    }
+  </script>
+</Layout>
