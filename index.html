@@ -613,14 +613,14 @@
         </div>
         
         <div class="product-grid">
-            <div class="product-card" data-product="trailblazer-fleece" data-price="$118">
+            <div class="product-card" data-product="trailblazer-fleece" data-price="$110">
                 <div class="product-image-container">
                     <img src="/images/pink-fleece.png" alt="Trailblazer Fleece" class="product-image">
                     <div class="product-badge">PRE-ORDER</div>
                 </div>
                 <div class="product-info">
                     <h3 class="product-name">Trailblazer Fleece</h3>
-                    <p class="product-price">$118</p>
+                    <p class="product-price">$110</p>
                     <div class="color-carousel">
                         <div class="color-swatch active" style="background: linear-gradient(135deg, #d4a5a5 0%, #c49494 100%);" data-image="/images/pink-fleece.png"></div>
                         <div class="color-swatch" style="background: radial-gradient(circle, #2a2a2a 20%, #f0e6db 20%, #f0e6db 40%, #2a2a2a 40%);" data-image="/images/polka-fleece.png"></div>
@@ -629,14 +629,14 @@
                 </div>
             </div>
 
-            <div class="product-card" data-product="capri-white" data-price="$98">
+            <div class="product-card" data-product="capri-white" data-price="$80">
                 <div class="product-image-container">
                     <img src="/images/white-pants.png" alt="Trail Capri" class="product-image">
                     <div class="product-badge">PRE-ORDER</div>
                 </div>
                 <div class="product-info">
                     <h3 class="product-name">Trail Capri</h3>
-                    <p class="product-price">$98</p>
+                    <p class="product-price">$80</p>
                     <div class="color-carousel">
                         <div class="color-swatch active" style="background: #f5f5f5;" data-image="/images/white-pants.png"></div>
                         <div class="color-swatch" style="background: #6b5648;" data-image="/images/brown-pants-bg.png"></div>
@@ -644,14 +644,14 @@
                 </div>
             </div>
 
-            <div class="product-card" data-product="summit-pant-olive" data-price="$168">
+            <div class="product-card" data-product="summit-pant-olive" data-price="$90">
                 <div class="product-image-container">
                     <img src="/images/olive-pants-bg.png" alt="Summit Pant" class="product-image">
                     <div class="product-badge">PRE-ORDER</div>
                 </div>
                 <div class="product-info">
                     <h3 class="product-name">Summit Pant</h3>
-                    <p class="product-price">$168</p>
+                    <p class="product-price">$90</p>
                     <div class="color-carousel">
                         <div class="color-swatch active" style="background: #5a6650;" data-image="/images/olive-pants-bg.png"></div>
                         <div class="color-swatch" style="background: #7a7a7a;" data-image="/images/gray-pants-bg.png"></div>
@@ -659,14 +659,14 @@
                 </div>
             </div>
 
-            <div class="product-card" data-product="horizon-shorts" data-price="$68">
+            <div class="product-card" data-product="horizon-shorts" data-price="$60">
                 <div class="product-image-container">
                     <img src="/images/yellow-shorts-bg.png" alt="Horizon Shorts" class="product-image">
                     <div class="product-badge">PRE-ORDER</div>
                 </div>
                 <div class="product-info">
                     <h3 class="product-name">Horizon Shorts</h3>
-                    <p class="product-price">$68</p>
+                    <p class="product-price">$60</p>
                 </div>
             </div>
 
@@ -716,14 +716,18 @@
             <div id="formContent">
                 <h3 class="modal-product-name" id="modalProductName"></h3>
                 <p class="modal-product-price" id="modalProductPrice"></p>
-                <form class="preorder-form" onsubmit="submitPreorder(event)">
+                <form class="preorder-form" name="preorder" method="POST" data-netlify="true" netlify-honeypot="bot-field" onsubmit="submitPreorder(event)">
+                    <input type="hidden" name="form-name" value="preorder">
+                    <input type="hidden" name="bot-field">
+                    <input type="hidden" name="product" id="hiddenProductName">
+                    <input type="hidden" name="price" id="hiddenProductPrice">
                     <div class="form-group">
                         <label class="form-label">Email Address</label>
-                        <input type="email" class="form-input" placeholder="your@email.com" required>
+                        <input type="email" name="email" class="form-input" placeholder="your@email.com" required>
                     </div>
                     <div class="form-group">
                         <label class="form-label">Size</label>
-                        <select class="form-input" required>
+                        <select name="size" class="form-input" required>
                             <option value="">Select Size</option>
                             <option value="xs">XS</option>
                             <option value="s">S</option>
@@ -772,6 +776,8 @@
                 
                 document.getElementById('modalProductName').textContent = productName;
                 document.getElementById('modalProductPrice').textContent = productPrice;
+                document.getElementById('hiddenProductName').value = productName;
+                document.getElementById('hiddenProductPrice').value = productPrice;
                 
                 modal.classList.add('active');
                 document.body.style.overflow = 'hidden';
@@ -789,12 +795,25 @@
 
         function submitPreorder(e) {
             e.preventDefault();
-            document.getElementById('formContent').style.display = 'none';
-            document.getElementById('successMessage').classList.add('active');
+            const form = e.target;
             
-            setTimeout(() => {
-                closeModal();
-            }, 3500);
+            fetch('/', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: new URLSearchParams(new FormData(form)).toString()
+            })
+            .then(() => {
+                document.getElementById('formContent').style.display = 'none';
+                document.getElementById('successMessage').classList.add('active');
+                form.reset();
+                
+                setTimeout(() => {
+                    closeModal();
+                }, 3500);
+            })
+            .catch((error) => {
+                alert('There was an error submitting your pre-order. Please try again.');
+            });
         }
 
         modal.addEventListener('click', function(e) {
