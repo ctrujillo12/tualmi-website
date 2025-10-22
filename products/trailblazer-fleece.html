@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Trailblazer Fleece — Tualmi</title>
+
+  <!-- Fonts (matches landing page) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant:wght@300;400;500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <!-- Product page styles -->
+  <link rel="stylesheet" href="../product-page.css">
+
+  <!-- small helper script -->
+  <!-- <script src="../product-page.js" defer></script> -->
+  <script src="../cart-manager.js"></script>
+  <script src="../product-page.js" defer></script>
+</head>
+<body>
+
+  <!-- NAV (same look & links as landing) -->
+  <nav class="nav">
+    <a href="index.html">
+        <img src="/images/logo.png" alt="Tualmi" class="logo">
+    </a>
+
+    <div class="nav-links">
+      <a href="/#collection">COLLECTION</a>
+      <a href="/#about">ABOUT</a>
+      <a href="/cart.html">CART</a>
+    </div>
+  </nav>
+
+  <!-- Page content: classic retail layout -->
+  <main class="product-main container">
+    <a class="back-link" href="/index.html">← Back to shop</a>
+
+    <div class="product-layout">
+      <!-- LEFT: gallery -->
+      <div class="gallery">
+        <div class="main-image-wrap">
+          <img id="mainImage" src="/images/pink-fleece.png" alt="Trailblazer Fleece" class="main-image">
+        </div>
+
+        <div class="thumb-row">
+          <button class="thumb" data-image="/images/pink-fleece.png" aria-label="Pink">
+            <img src="/images/pink-fleece.png" alt="pink" />
+          </button>
+          <button class="thumb" data-image="/images/polka-fleece.png" aria-label="Polka">
+            <img src="/images/polka-fleece.png" alt="polka" />
+          </button>
+          <button class="thumb" data-image="/images/yellow-fleece.png" aria-label="Yellow">
+            <img src="/images/yellow-fleece.png" alt="yellow" />
+          </button>
+        </div>
+      </div>
+
+      <!-- RIGHT: product details -->
+      <aside class="details">
+        <h1 class="product-title">Trailblazer Fleece</h1>
+        <p class="product-sub">Lightweight insulating fleece — cozy without the bulk.</p>
+        <p class="product-price-large">$110</p>
+
+        <!-- Color swatches -->
+        <div class="label">Color</div>
+        <div class="color-carousel product-colors" role="radiogroup" aria-label="Choose color">
+          <button class="color-swatch active" data-image="/images/pink-fleece.png" title="Dusty Rose" style="background: linear-gradient(135deg, #d4a5a5 0%, #c49494 100%);"></button>
+          <button class="color-swatch" data-image="/images/polka-fleece.png" title="Polka" style="background: radial-gradient(circle, #2a2a2a 20%, #f0e6db 20%, #f0e6db 40%, #2a2a2a 40%);"></button>
+          <button class="color-swatch" data-image="/images/yellow-fleece.png" title="Sunlit" style="background: #e8d4a0;"></button>
+        </div>
+
+        <!-- Size selector -->
+        <div class="label" style="margin-top:14px;">Size</div>
+        <div class="size-grid" role="radiogroup" aria-label="Choose size">
+          <button class="size-btn" data-size="XS">XS</button>
+          <button class="size-btn" data-size="S">S</button>
+          <button class="size-btn" data-size="M">M</button>
+          <button class="size-btn" data-size="L">L</button>
+          <button class="size-btn" data-size="XL">XL</button>
+        </div>
+
+        <!-- Quantity & add to cart -->
+        <div class="purchase-row">
+          <label class="sr-only" for="qty">Quantity</label>
+          <select id="qty" class="qty-select" aria-label="Quantity">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+          </select>
+
+          <button id="addToCartBtn" class="add-btn">Add to cart</button>
+        </div>
+
+        <!-- micro copy -->
+        <p class="micro">Free returns · Sustainable materials · Limited run</p>
+
+        <!-- mini cart / confirmation (hidden until add) -->
+        <div id="miniCart" class="mini-cart" aria-live="polite" hidden>
+          <!-- <div class="mini-text">Added to cart</div> -->
+          <a href="/cart.html" class="view-cart">View cart</a>
+        </div>
+      </aside>
+    </div>
+
+    <!-- Product details tabs -->
+    <section class="product-tabs">
+      <div class="tabs">
+        <button class="tab active" data-tab="desc">Description</button>
+        <button class="tab" data-tab="materials">Materials</button>
+        <button class="tab" data-tab="shipping">Shipping</button>
+        <button class="tab" data-tab="fit">Fit Guide</button>
+      </div>
+
+      <div class="tab-panels">
+        <div class="tab-panel active" id="desc">
+          <h3>Trailblazer Fleece — built for movement</h3>
+          <p>
+            The Trailblazer Fleece is a lightweight midlayer that traps warmth while
+            allowing breathability. Cut for layered mobility with a slightly tapered
+            hem and articulated sleeves. Perfect for alpine mornings and camp evenings.
+          </p>
+        </div>
+
+        <div class="tab-panel" id="materials">
+          <h3>Materials</h3>
+          <ul>
+            <li>Recycled polyester fleece (300 GSM)</li>
+            <li>Bluesign® approved trims</li>
+            <li>Oeko-Tex certified dyes</li>
+          </ul>
+        </div>
+
+        <div class="tab-panel" id="shipping">
+          <h3>Shipping & Returns</h3>
+          <p>Ships within 3–7 business days from our California studio. Free returns within 30 days.</p>
+        </div>
+
+        <div class="tab-panel" id="fit">
+          <h3>Fit Guide</h3>
+          <p>Model is 5'9" / 173 cm and wears size S. For a relaxed fit, size up one.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer (same content & style as landing) -->
+  <footer class="footer" id="about">
+    <div class="footer-content container">
+      <div class="footer-grid">
+        <div class="footer-section">
+          <h3 class="footer-title">Natural Materials</h3>
+          <p class="footer-text">We craft every piece with sustainable, natural fabrics that honor the earth and feel incredible against your skin.</p>
+        </div>
+        <div class="footer-section">
+          <h3 class="footer-title">Giving Back</h3>
+          <p class="footer-text">5% of all profits support conservation efforts protecting the wild places that inspire us.</p>
+        </div>
+        <div class="footer-section">
+          <h3 class="footer-title">Yosemite Inspired</h3>
+          <p class="footer-text">Born from the beauty of Tuolumne Meadows, where granite peaks meet alpine wildflowers and endless possibility.</p>
+        </div>
+        <div class="footer-section">
+          <h3 class="footer-title">By Women, For Women</h3>
+          <p class="footer-text">A California-born brand redefining women's gear with fashion and function at its core.</p>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p class="footer-tagline">Adventure meets elegance</p>
+        <p class="footer-copyright">© 2025 Tualmi. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

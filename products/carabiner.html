@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Carabiner — Tualmi</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant:wght@300;400;500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <!-- Product page styles -->
+  <link rel="stylesheet" href="../product-page.css">
+
+  <!-- Scripts -->
+  <script src="../product-page.js" defer></script>
+  <script src="../cart-manager.js" defer></script>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="nav">
+    <a href="/index.html" class="logo-link" aria-label="Tualmi home">
+      <img src="/images/logo.png" alt="Tualmi logo" class="logo">
+    </a>
+
+    <div class="nav-links">
+      <a href="/#collection">COLLECTION</a>
+      <a href="/#about">ABOUT</a>
+      <a href="/cart.html">CART</a>
+    </div>
+  </nav>
+
+  <main class="product-main container">
+    <a class="back-link" href="/index.html">← Back to shop</a>
+
+    <div class="product-layout">
+      <!-- LEFT: gallery -->
+      <div class="gallery">
+        <div class="product-badge">PRE-ORDER</div>
+        <div class="main-image-wrap">
+          <img id="mainImage" src="/images/carabiner.png" alt="Tualmi Carabiner" class="main-image">
+        </div>
+      </div>
+
+      <!-- RIGHT: details -->
+      <aside class="details">
+        <h1 class="product-title">Carabiner</h1>
+        <p class="product-sub">Lightweight aluminum clip for keys, gear, or quick attachments on the trail.</p>
+        <p class="product-price-large">$12</p>
+
+        <!-- Quantity & add to cart -->
+        <div class="purchase-row" style="margin-top: 18px;">
+          <label class="sr-only" for="qty">Quantity</label>
+          <select id="qty" class="qty-select" aria-label="Quantity">
+            <option value="1" selected>1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+          </select>
+
+          <button id="addToCartBtn" class="add-btn">Pre-order</button>
+        </div>
+
+        <p class="micro">Ships in late November · Free returns · Limited pre-order</p>
+
+        <div id="miniCart" class="mini-cart" aria-live="polite" hidden>
+          <!-- <div class="mini-text">Added to cart</div> -->
+          <a href="/cart.html" class="view-cart">View cart</a>
+        </div>
+      </aside>
+    </div>
+
+    <!-- Product details tabs -->
+    <section class="product-tabs">
+      <div class="tabs" role="tablist">
+        <button class="tab active" data-tab="desc" role="tab" aria-selected="true">Description</button>
+        <button class="tab" data-tab="materials" role="tab" aria-selected="false">Materials</button>
+        <button class="tab" data-tab="shipping" role="tab" aria-selected="false">Shipping</button>
+        <button class="tab" data-tab="fit" role="tab" aria-selected="false">Specs</button>
+      </div>
+
+      <div class="tab-panels">
+        <div class="tab-panel active" id="desc" role="tabpanel">
+          <h3>Carabiner — simple, strong, and functional</h3>
+          <p>
+            Designed for everyday carry and outdoor adventures, the Tualmi Carabiner offers
+            durable performance in a lightweight package. Clip it to your pack, belt loop, or water bottle — the perfect minimalist essential.
+          </p>
+        </div>
+
+        <div class="tab-panel" id="materials" role="tabpanel" hidden>
+          <h3>Materials</h3>
+          <ul>
+            <li>Anodized aluminum body</li>
+            <li>Stainless steel spring gate</li>
+            <li>Corrosion-resistant finish</li>
+          </ul>
+        </div>
+
+        <div class="tab-panel" id="shipping" role="tabpanel" hidden>
+          <h3>Shipping & Returns</h3>
+          <p>Pre-orders ship in late November. Free returns within 30 days of delivery.</p>
+        </div>
+
+        <div class="tab-panel" id="fit" role="tabpanel" hidden>
+          <h3>Specs</h3>
+          <ul>
+            <li>Length: 2.5 in (6.3 cm)</li>
+            <li>Width: 1.4 in (3.6 cm)</li>
+            <li>Weight: 0.5 oz (14 g)</li>
+            <li>Not rated for climbing use</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer" id="about">
+    <div class="footer-content container">
+      <div class="footer-grid">
+        <div class="footer-section">
+          <h3 class="footer-title">Natural Materials</h3>
+          <p class="footer-text">We craft every piece with sustainable, natural fabrics that honor the earth and feel incredible against your skin.</p>
+        </div>
+        <div class="footer-section">
+          <h3 class="footer-title">Giving Back</h3>
+          <p class="footer-text">5% of all profits support conservation efforts protecting the wild places that inspire us.</p>
+        </div>
+        <div class="footer-section">
+          <h3 class="footer-title">Yosemite Inspired</h3>
+          <p class="footer-text">Born from the beauty of Tuolumne Meadows, where granite peaks meet alpine wildflowers and endless possibility.</p>
+        </div>
+        <div class="footer-section">
+          <h3 class="footer-title">By Women, For Women</h3>
+          <p class="footer-text">A California-born brand redefining women's gear with fashion and function at its core.</p>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p class="footer-tagline">Adventure meets elegance</p>
+        <p class="footer-copyright">© 2025 Tualmi. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

@@ -200,7 +200,11 @@
             opacity: 0;
             transform: translateY(60px);
             background: var(--off-white);
+            text-decoration: none; /* removes underline */
+            color: inherit; /* keeps the text color the same */
         }
+
+        
 
         .product-card.visible {
             animation: fadeInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
@@ -587,10 +591,14 @@
 </head>
 <body>
     <nav class="nav">
-        <img src="/images/logo.png" alt="Tualmi" class="logo">
+        <a href="index.html">
+            <img src="/images/logo.png" alt="Tualmi" class="logo">
+        </a>
+
         <div class="nav-links">
             <a href="#collection">COLLECTION</a>
             <a href="#about">ABOUT</a>
+            <a href="/cart.html">CART</a>
         </div>
     </nav>
 
@@ -614,7 +622,7 @@
         </div>
         
         <div class="product-grid">
-            <div class="product-card" data-product="trailblazer-fleece" data-price="$110">
+            <a href="/products/trailblazer-fleece.html" class="product-card" data-product="trailblazer-fleece" data-price="$110">
                 <div class="product-image-container">
                     <img src="/images/pink-fleece.png" alt="Trailblazer Fleece" class="product-image">
                     <div class="product-badge">PRE-ORDER</div>
@@ -628,9 +636,9 @@
                         <div class="color-swatch" style="background: #e8d4a0;" data-image="/images/yellow-fleece.png"></div>
                     </div>
                 </div>
-            </div>
+            </a>
 
-            <div class="product-card" data-product="capri-white" data-price="$80">
+            <a href="/products/trail-capri.html" class="product-card" data-product="trail-capri" data-price="$80">
                 <div class="product-image-container">
                     <img src="/images/white-pants.png" alt="Trail Capri" class="product-image">
                     <div class="product-badge">PRE-ORDER</div>
@@ -643,9 +651,9 @@
                         <div class="color-swatch" style="background: #6b5648;" data-image="images/brown-pants-bg.png"></div>
                     </div>
                 </div>
-            </div>
+            </a>
 
-            <div class="product-card" data-product="summit-pant-olive" data-price="$90">
+            <a href="/products/summit-pant.html" class="product-card" data-product="summit-pant" data-price="$90">
                 <div class="product-image-container">
                     <img src="/images/olive-pants-bg.png" alt="Summit Pant" class="product-image">
                     <div class="product-badge">PRE-ORDER</div>
@@ -658,9 +666,9 @@
                         <div class="color-swatch" style="background: #7a7a7a;" data-image="images/gray-pants-bg.png"></div>
                     </div>
                 </div>
-            </div>
+            </a>
 
-            <div class="product-card" data-product="horizon-shorts" data-price="$60">
+            <a href="/products/horizon-shorts.html" class="product-card" data-product="horizon-shorts" data-price="$60">
                 <div class="product-image-container">
                     <img src="/images/yellow-shorts-bg.png" alt="Horizon Shorts" class="product-image">
                     <div class="product-badge">PRE-ORDER</div>
@@ -669,9 +677,9 @@
                     <h3 class="product-name">Horizon Shorts</h3>
                     <p class="product-price">$60</p>
                 </div>
-            </div>
+            </a>
 
-            <div class="product-card" data-product="carabiner" data-price="$12">
+            <a href="/products/carabiner.html" class="product-card" data-product="carabiner" data-price="$12">
                 <div class="product-image-container">
                     <img src="/images/carabiner.png" alt="Carabiner" class="product-image">
                     <div class="product-badge">PRE-ORDER</div>
@@ -680,9 +688,10 @@
                     <h3 class="product-name">Carabiner</h3>
                     <p class="product-price">$12</p>
                 </div>
-            </div>
+            </a>
         </div>
     </section>
+
 
     <footer class="footer" id="about">
         <div class="footer-content">
@@ -770,8 +779,15 @@
 
         productCards.forEach(card => {
             card.addEventListener('click', function(e) {
+                // If the card is a link to a product page, just navigate
+                const link = card.getAttribute('href');
+                if (link && link.includes('/products/')) {
+                    return; // skip modal
+                }
+
+                // Ignore color swatch clicks
                 if (e.target.closest('.color-swatch')) return;
-                
+
                 const productName = this.querySelector('.product-name').textContent;
                 const productPrice = this.querySelector('.product-price').textContent;
                 
@@ -784,6 +800,7 @@
                 document.body.style.overflow = 'hidden';
             });
         });
+
 
         function closeModal() {
             modal.classList.remove('active');

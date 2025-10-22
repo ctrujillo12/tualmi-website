@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Shopping Cart — Tualmi</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant:wght@300;400;500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="cart.css">
+  <script src="https://js.stripe.com/v3/"></script>
+  <script src="cart-manager.js"></script>
+  <script src="cart.js" defer></script>
+  <script src="nav-cart-count.js"></script>
+</head>
+
+<body>
+
+  <nav class="nav">
+    <a href="index.html">
+      <img src="/images/logo.png" alt="Tualmi" class="logo">
+    </a>
+
+    <div class="nav-links">
+      <a href="index.html#collection">COLLECTION</a>
+      <a href="index.html#about">ABOUT</a>
+      <a href="cart.html" class="cart-link">
+        CART <span class="cart-count" id="navCartCount">0</span>
+      </a>
+    </div>
+  </nav>
+
+  <main class="cart-main">
+    <!-- Empty state -->
+    <div id="emptyCart" class="empty-state" hidden>
+      <div class="empty-content">
+        <h1 class="empty-title">Your cart is empty</h1>
+        <p class="empty-text">Discover our collection of thoughtfully designed outdoor wear</p>
+        <a href="index.html#collection" class="explore-btn">Explore Collection</a>
+      </div>
+    </div>
+
+    <!-- Cart with items -->
+    <div id="cartContent" class="cart-layout">
+      <div class="cart-header">
+        <h1 class="cart-title">Cart</h1>
+        <a href="index.html#collection" class="continue-link">Continue shopping</a>
+      </div>
+
+      <div class="cart-grid">
+        <!-- Items column -->
+        <div class="items-column">
+          <div id="cartItems" class="cart-items">
+            <!-- Cart items inserted by JS -->
+          </div>
+        </div>
+
+        <!-- Summary column -->
+        <div class="summary-column">
+          <div class="order-summary">
+            <div class="summary-row">
+              <span class="summary-label">Subtotal</span>
+              <span class="summary-value" id="subtotal">$0.00</span>
+            </div>
+            
+            <div class="summary-row light">
+              <span class="summary-label">Shipping</span>
+              <span class="summary-value">Free</span>
+            </div>
+            
+            <div class="summary-total">
+              <span class="total-label">Total</span>
+              <span class="total-value" id="total">$0.00</span>
+            </div>
+
+            <button id="checkoutBtn" class="checkout-btn">
+              Checkout
+            </button>
+
+            <p class="secure-text">Secure checkout powered by Stripe</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer" id="about">
+    <div class="footer-content">
+      <div class="footer-grid">
+        <div class="footer-section">
+          <h3 class="footer-title">Natural Materials</h3>
+          <p class="footer-text">We craft every piece with sustainable, natural fabrics that honor the earth and feel incredible against your skin.</p>
+        </div>
+        <div class="footer-section">
+          <h3 class="footer-title">Giving Back</h3>
+          <p class="footer-text">5% of all profits support conservation efforts protecting the wild places that inspire us.</p>
+        </div>
+        <div class="footer-section">
+          <h3 class="footer-title">Yosemite Inspired</h3>
+          <p class="footer-text">Born from the beauty of Tuolumne Meadows, where granite peaks meet alpine wildflowers and endless possibility.</p>
+        </div>
+        <div class="footer-section">
+          <h3 class="footer-title">By Women, For Women</h3>
+          <p class="footer-text">A California-born brand redefining women's gear with fashion and function at its core.</p>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p class="footer-tagline">Adventure meets elegance</p>
+        <p class="footer-copyright">© 2025 Tualmi. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Trail Capri — Tualmi</title>
+
+  <!-- Fonts (matches landing page) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant:wght@300;400;500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <!-- Product page styles -->
+  <link rel="stylesheet" href="../product-page.css">
+
+  <!-- Cart manager and product page scripts -->
+  <script src="../cart-manager.js"></script>
+  <script src="../product-page.js" defer></script>
+</head>
+<body>
+
+  <!-- NAV (same look & links as landing) -->
+  <nav class="nav">
+    <a href="index.html">
+        <img src="/images/logo.png" alt="Tualmi" class="logo">
+    </a>
+
+    <div class="nav-links">
+      <a href="/#collection">COLLECTION</a>
+      <a href="/#about">ABOUT</a>
+      <a href="/cart.html">CART</a>
+    </div>
+  </nav>
+
+  <!-- Page content: classic retail layout -->
+  <main class="product-main container">
+    <a class="back-link" href="/index.html">← Back to shop</a>
+
+    <div class="product-layout">
+      <!-- LEFT: gallery -->
+      <div class="gallery">
+        <div class="main-image-wrap">
+          <img id="mainImage" src="/images/white-pants.png" alt="Trail Capri" class="main-image">
+        </div>
+
+        <div class="thumb-row">
+          <button class="thumb" data-image="/images/white-pants.png" aria-label="White">
+            <img src="/images/white-pants.png" alt="white" />
+          </button>
+          <button class="thumb" data-image="/images/brown-pants-bg.png" aria-label="Brown">
+            <img src="/images/brown-pants-bg.png" alt="brown" />
+          </button>
+        </div>
+      </div>
+
+      <!-- RIGHT: product details -->
+      <aside class="details">
+        <h1 class="product-title">Trail Capri</h1>
+        <p class="product-sub">Lightweight, versatile capris — perfect for every adventure.</p>
+        <p class="product-price-large">$80</p>
+
+        <!-- Color swatches -->
+        <div class="label">Color</div>
+        <div class="color-carousel product-colors" role="radiogroup" aria-label="Choose color">
+          <button class="color-swatch active" data-image="/images/white-pants.png" title="White" style="background: #f5f5f5;"></button>
+          <button class="color-swatch" data-image="/images/brown-pants-bg.png" title="Brown" style="background: #6b5648;"></button>
+        </div>
+
+        <!-- Size selector -->
+        <div class="label" style="margin-top:14px;">Size</div>
+        <div class="size-grid" role="radiogroup" aria-label="Choose size">
+          <button class="size-btn" data-size="XS">XS</button>
+          <button class="size-btn" data-size="S">S</button>
+          <button class="size-btn" data-size="M">M</button>
+          <button class="size-btn" data-size="L">L</button>
+          <button class="size-btn" data-size="XL">XL</button>
+        </div>
+
+        <!-- Quantity & add to cart -->
+        <div class="purchase-row">
+          <label class="sr-only" for="qty">Quantity</label>
+          <select id="qty" class="qty-select" aria-label="Quantity">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+          </select>
+
+          <button id="addToCartBtn" class="add-btn">Add to cart</button>
+        </div>
+
+        <!-- micro copy -->
+        <p class="micro">Free returns · Sustainable materials · Limited run</p>
+
+        <!-- mini cart / confirmation (hidden until add) -->
+        <div id="miniCart" class="mini-cart" aria-live="polite" hidden>
+          <!-- <div class="mini-text">Added to cart</div> -->
+          <a href="/cart.html" class="view-cart">View cart</a>
+        </div>
+      </aside>
+    </div>
+
+    <!-- Product details tabs -->
+    <section class="product-tabs">
+      <div class="tabs">
+        <button class="tab active" data-tab="desc">Description</button>
+        <button class="tab" data-tab="materials">Materials</button>
+        <button class="tab" data-tab="shipping">Shipping</button>
+        <button class="tab" data-tab="fit">Fit Guide</button>
+      </div>
+
+      <div class="tab-panels">
+        <div class="tab-panel active" id="desc">
+          <h3>Trail Capri — made for movement</h3>
+          <p>
+            The Trail Capri is a lightweight, breathable pant designed for all-day comfort
+            and mobility. Cut for a tapered fit with stretchy fabric, perfect for hikes, travel, or everyday wear.
+          </p>
+        </div>
+
+        <div class="tab-panel" id="materials">
+          <h3>Materials</h3>
+          <ul>
+            <li>Recycled polyester blend (220 GSM)</li>
+            <li>Durable, quick-dry finish</li>
+            <li>Bluesign® approved trims</li>
+          </ul>
+        </div>
+
+        <div class="tab-panel" id="shipping">
+          <h3>Shipping & Returns</h3>
+          <p>Ships within 3–7 business days from our California studio. Free returns within 30 days.</p>
+        </div>
+
+        <div class="tab-panel" id="fit">
+          <h3>Fit Guide</h3>
+          <p>Model is 5'9" / 173 cm and wears size S. Capri fit is slim through the thigh with a tapered leg.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer (same content & style as landing) -->
+  <footer class="footer" id="about">
+    <div class="footer-content container">
+      <div class="footer-grid">
+        <div class="footer-section">
+          <h3 class="footer-title">Natural Materials</h3>
+          <p class="footer-text">We craft every piece with sustainable, natural fabrics that honor the earth and feel incredible against your skin.</p>
+        </div>
+        <div class="footer-section">
+          <h3 class="footer-title">Giving Back</h3>
+          <p class="footer-text">5% of all profits support conservation efforts protecting the wild places that inspire us.</p>
+        </div>
+        <div class="footer-section">
+          <h3 class="footer-title">Yosemite Inspired</h3>
+          <p class="footer-text">Born from the beauty of Tuolumne Meadows, where granite peaks meet alpine wildflowers and endless possibility.</p>
+        </div>
+        <div class="footer-section">
+          <h3 class="footer-title">By Women, For Women</h3>
+          <p class="footer-text">A California-born brand redefining women's gear with fashion and function at its core.</p>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p class="footer-tagline">Adventure meets elegance</p>
+        <p class="footer-copyright">© 2025 Tualmi. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

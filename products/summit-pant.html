@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Summit Pant — Tualmi</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant:wght@300;400;500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <!-- Product page styles -->
+  <link rel="stylesheet" href="../product-page.css">
+
+  <script src="../product-page.js" defer></script>
+  <script src="../cart-manager.js"></script>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="nav">
+    <a href="/index.html">
+      <img src="/images/logo.png" alt="Tualmi" class="logo">
+    </a>
+
+    <div class="nav-links">
+      <a href="/#collection">COLLECTION</a>
+      <a href="/#about">ABOUT</a>
+      <a href="/cart.html">CART</a>
+    </div>
+  </nav>
+
+  <main class="product-main container">
+    <a class="back-link" href="/index.html">← Back to shop</a>
+
+    <div class="product-layout">
+      <!-- LEFT: gallery -->
+      <div class="gallery">
+        <div class="product-badge">PRE-ORDER</div>
+        <div class="main-image-wrap">
+          <img id="mainImage" src="/images/olive-pants-bg.png" alt="Summit Pant in Olive" class="main-image">
+        </div>
+
+        <div class="thumb-row">
+          <button class="thumb" data-image="/images/olive-pants-bg.png" aria-label="Olive">
+            <img src="/images/olive-pants-bg.png" alt="Olive" />
+          </button>
+          <button class="thumb" data-image="/images/gray-pants-bg.png" aria-label="Gray">
+            <img src="/images/gray-pants-bg.png" alt="Gray" />
+          </button>
+        </div>
+      </div>
+
+      <!-- RIGHT: details -->
+      <aside class="details">
+        <h1 class="product-title">Summit Pant</h1>
+        <p class="product-sub">Technical hiking pant built for comfort and durability.</p>
+        <p class="product-price-large">$90</p>
+
+        <!-- Color swatches -->
+        <div class="label">Color</div>
+        <div class="color-carousel product-colors" role="radiogroup" aria-label="Choose color">
+          <button class="color-swatch active" data-image="/images/olive-pants-bg.png" title="Olive" style="background: #5a6650;"></button>
+          <button class="color-swatch" data-image="/images/gray-pants-bg.png" title="Gray" style="background: #7a7a7a;"></button>
+        </div>
+
+        <!-- Size selector -->
+        <div class="label" style="margin-top:14px;">Size</div>
+        <div class="size-grid" role="radiogroup" aria-label="Choose size">
+          <button class="size-btn" data-size="XS">XS</button>
+          <button class="size-btn" data-size="S">S</button>
+          <button class="size-btn" data-size="M">M</button>
+          <button class="size-btn" data-size="L">L</button>
+          <button class="size-btn" data-size="XL">XL</button>
+        </div>
+
+        <!-- Quantity & cart -->
+        <div class="purchase-row">
+          <label class="sr-only" for="qty">Quantity</label>
+          <select id="qty" class="qty-select" aria-label="Quantity">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+          </select>
+
+          <button id="addToCartBtn" class="add-btn">Pre-order</button>
+        </div>
+
+        <p class="micro">Ships in late November · Free returns · Limited pre-order</p>
+
+        <div id="miniCart" class="mini-cart" aria-live="polite" hidden>
+          <!-- <div class="mini-text">Added to cart</div> -->
+          <a href="/cart.html" class="view-cart">View cart</a>
+        </div>
+      </aside>
+    </div>
+
+    <!-- Product details tabs -->
+    <section class="product-tabs">
+      <div class="tabs">
+        <button class="tab active" data-tab="desc">Description</button>
+        <button class="tab" data-tab="materials">Materials</button>
+        <button class="tab" data-tab="shipping">Shipping</button>
+        <button class="tab" data-tab="fit">Fit Guide</button>
+      </div>
+
+      <div class="tab-panels">
+        <div class="tab-panel active" id="desc">
+          <h3>Summit Pant — versatile performance</h3>
+          <p>
+            Engineered for movement, the Summit Pant combines stretch performance with a clean, minimal design.
+            A slightly tapered fit and articulated knees keep you comfortable on the trail or around town.
+          </p>
+        </div>
+
+        <div class="tab-panel" id="materials">
+          <h3>Materials</h3>
+          <ul>
+            <li>Recycled nylon-spandex blend</li>
+            <li>DWR water-repellent finish</li>
+            <li>Durable stretch weave with soft interior</li>
+          </ul>
+        </div>
+
+        <div class="tab-panel" id="shipping">
+          <h3>Shipping & Returns</h3>
+          <p>Pre-orders ship in late November. Free returns within 30 days of delivery.</p>
+        </div>
+
+        <div class="tab-panel" id="fit">
+          <h3>Fit Guide</h3>
+          <p>Model is 5'8" / 173 cm and wears size S. True to size with a tapered leg and mid-rise waist.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer" id="about">
+    <div class="footer-content container">
+      <div class="footer-grid">
+        <div class="footer-section">
+          <h3 class="footer-title">Natural Materials</h3>
+          <p class="footer-text">We craft every piece with sustainable, natural fabrics that honor the earth and feel incredible against your skin.</p>
+        </div>
+        <div class="footer-section">
+          <h3 class="footer-title">Giving Back</h3>
+          <p class="footer-text">5% of all profits support conservation efforts protecting the wild places that inspire us.</p>
+        </div>
+        <div class="footer-section">
+          <h3 class="footer-title">Yosemite Inspired</h3>
+          <p class="footer-text">Born from the beauty of Tuolumne Meadows, where granite peaks meet alpine wildflowers and endless possibility.</p>
+        </div>
+        <div class="footer-section">
+          <h3 class="footer-title">By Women, For Women</h3>
+          <p class="footer-text">A California-born brand redefining women's gear with fashion and function at its core.</p>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p class="footer-tagline">Adventure meets elegance</p>
+        <p class="footer-copyright">© 2025 Tualmi. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
