@@ -1,7 +1,7 @@
 /* cart.js - Shopping cart page logic and Stripe checkout */
 
 // Initialize Stripe (replace with your publishable key)
-const stripe = Stripe('pk_test_51SJh5BIvWMO4WDDOPxUg0WCC4VRIC9z8mKSRzhXnNr9x4Qmp20u5DgjsszBsvA22ovIrvxxOLH5Gq0CAqooweRVX00DWNodXRz');
+const stripe = Stripe('pk_live_51SJh4mIR1P5z5KD6LqYjKFY4uaaErSCwYiYF72BtvvnIP8aXYmkPKHrWrYtCDVloarLq7sssltaogHtTwhmcADA100EgPK0tw3');
 
 document.addEventListener('DOMContentLoaded', () => {
   const cartItemsContainer = document.getElementById('cartItems');

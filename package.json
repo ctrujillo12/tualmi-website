@@ -8,16 +8,19 @@
     "build": "vite build",
     "preview": "vite preview",
     "server": "node server.js",
-    "server:dev": "nodemon server.js"
+    "server:dev": "nodemon server.js",
+    "dev:all": "concurrently \"npm run server:dev\" \"npm run dev\""
   },
   "dependencies": {
     "cors": "^2.8.5",
+    "dotenv": "^17.2.3",
     "express": "^4.21.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "stripe": "^14.25.0"
   },
   "devDependencies": {
+    "concurrently": "^8.2.2",
     "nodemon": "^3.1.10",
     "vite": "^5.0.0"
   }
