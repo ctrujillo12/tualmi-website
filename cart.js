@@ -106,7 +106,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // Checkout button
   checkoutBtn.addEventListener('click', async () => {
     const items = window.CartManager.getAll();
-    
+    console.log('🛒 Items being sent to Stripe:', items); 
     if (items.length === 0) {
       alert('Your cart is empty');
       return;
