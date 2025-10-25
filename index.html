@@ -231,53 +231,28 @@
             }, 400);
         }
 
-        async function submitPreorder(e) {
+        function submitPreorder(e) {
             e.preventDefault();
             const form = e.target;
+            
+            fetch('https://tualmi-website.onrender.com/api/...', {
 
-            // Grab form data
-            const formData = new FormData(form);
-            const product = formData.get('product');
-            const price = parseFloat(formData.get('price').replace('$',''));
-            const size = formData.get('size');
-            const email = formData.get('email');
-
-            // Build payload matching your backend
-            const payload = {
-                items: [
-                    {
-                        name: product,
-                        price: price,
-                        quantity: 1,
-                        size: size,
-                        color: '', // you can fill in if you want color selection
-                        image: ''  // optional: link to image if you have one
-                    }
-                ]
-            };
-
-            try {
-                // Call your Render backend
-                const response = await fetch('https://tualmi-website.onrender.com/api/create-checkout-session', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(payload)
-                });
-
-                const session = await response.json();
-
-                // Redirect to Stripe Checkout
-                const stripe = Stripe('pk_test_...'); // replace with your Stripe public key
-                const { error } = await stripe.redirectToCheckout({ sessionId: session.id });
-
-                if (error) {
-                    console.error(error);
-                    alert('There was an error redirecting to Stripe. Please try again.');
-                }
-            } catch (err) {
-                console.error(err);
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: new URLSearchParams(new FormData(form)).toString()
+            })
+            .then(() => {
+                document.getElementById('formContent').style.display = 'none';
+                document.getElementById('successMessage').classList.add('active');
+                form.reset();
+                
+                setTimeout(() => {
+                    closeModal();
+                }, 3500);
+            })
+            .catch((error) => {
                 alert('There was an error submitting your pre-order. Please try again.');
-            }
+            });
         }
 
         modal.addEventListener('click', function(e) {
