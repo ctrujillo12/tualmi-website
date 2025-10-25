@@ -235,7 +235,8 @@
             e.preventDefault();
             const form = e.target;
             
-            fetch('/', {
+            fetch('https://tualmi-website.onrender.com/create-checkout-session', {
+
                 method: 'POST',
                 headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
                 body: new URLSearchParams(new FormData(form)).toString()
