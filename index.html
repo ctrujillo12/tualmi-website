@@ -235,11 +235,10 @@
             e.preventDefault();
             const form = e.target;
             
-            fetch('https://tualmi-website.onrender.com/api/...', {
-
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ items: itemsArray })
+            fetch('/api/create-checkout-session', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ items: itemsArray })
             })
             .then(() => {
                 document.getElementById('formContent').style.display = 'none';

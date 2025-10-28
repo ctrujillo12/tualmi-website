@@ -1,8 +1,10 @@
-/* server.js - Optimized Express server for Stripe checkout */
+/* server.js - Optimized Express server for Stripe checkout + serving frontend */
 import dotenv from 'dotenv';
 import express from 'express';
 import Stripe from 'stripe';
 import cors from 'cors';
+import path from 'path';
+import { fileURLToPath } from 'url';
 
 dotenv.config();
 
@@ -24,6 +26,11 @@ app.use(cors({
 }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+// Serve frontend build
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+app.use(express.static(path.join(__dirname, 'dist'))); // change 'dist' if your build folder is named differently
 
 // Health check (Render uses this to keep service alive)
 app.get('/api/health', (req, res) => {
@@ -109,6 +116,11 @@ app.post('/api/webhook', express.raw({ type: 'application/json' }), async (req, 
     console.error('Webhook signature verification failed:', err.message);
     res.status(400).send(`Webhook Error: ${err.message}`);
   }
+});
+
+// Fallback: serve index.html for frontend routes
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'dist', 'index.html'));
 });
 
 // Start server
