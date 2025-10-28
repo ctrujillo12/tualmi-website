@@ -27,10 +27,11 @@ app.use(cors({
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Serve frontend build
+// Serve frontend build from frontend/dist
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-app.use(express.static(path.join(__dirname, 'dist'))); // change 'dist' if your build folder is named differently
+const frontendPath = path.join(__dirname, 'frontend', 'dist');
+app.use(express.static(frontendPath));
 
 // Health check (Render uses this to keep service alive)
 app.get('/api/health', (req, res) => {
@@ -118,9 +119,9 @@ app.post('/api/webhook', express.raw({ type: 'application/json' }), async (req, 
   }
 });
 
-// Fallback: serve index.html for frontend routes
+// Fallback: serve index.html for all frontend routes
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'dist', 'index.html'));
+  res.sendFile(path.join(frontendPath, 'index.html'));
 });
 
 // Start server
