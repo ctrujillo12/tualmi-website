@@ -5,6 +5,7 @@ import Stripe from 'stripe';
 import cors from 'cors';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import bodyParser from 'body-parser'; // ✅ for webhook parsing
 
 dotenv.config();
 
@@ -18,22 +19,65 @@ if (!process.env.STRIPE_SECRET_KEY) {
 }
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
-// Middleware
-app.use(cors({
-  origin: process.env.CLIENT_URL || '*', // allow only your frontend domain in prod
-  methods: ['GET', 'POST'],
-  allowedHeaders: ['Content-Type']
-}));
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-
-// Serve frontend build from frontend/dist
+// Determine __dirname
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const frontendPath = path.join(__dirname, 'frontend', 'dist');
+
+// ✅ Middleware (order matters)
+app.use(
+  cors({
+    origin: process.env.CLIENT_URL || '*',
+    methods: ['GET', 'POST'],
+    allowedHeaders: ['Content-Type'],
+  })
+);
+
+// Parse JSON normally for most routes
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+// ✅ Webhook route needs *raw* body, so we move it ABOVE express.json() for that route
+app.post(
+  '/api/webhook',
+  bodyParser.raw({ type: 'application/json' }),
+  async (req, res) => {
+    const sig = req.headers['stripe-signature'];
+    if (!sig) return res.status(400).send('Missing Stripe signature');
+
+    try {
+      const event = stripe.webhooks.constructEvent(
+        req.body,
+        sig,
+        process.env.STRIPE_WEBHOOK_SECRET
+      );
+
+      switch (event.type) {
+        case 'checkout.session.completed':
+          console.log('Payment successful:', event.data.object.id);
+          break;
+        case 'payment_intent.succeeded':
+          console.log('PaymentIntent successful:', event.data.object.id);
+          break;
+        case 'payment_intent.payment_failed':
+          console.log('Payment failed:', event.data.object.id);
+          break;
+        default:
+          console.log(`Unhandled event type: ${event.type}`);
+      }
+
+      res.json({ received: true });
+    } catch (err) {
+      console.error('Webhook signature verification failed:', err.message);
+      res.status(400).send(`Webhook Error: ${err.message}`);
+    }
+  }
+);
+
+// ✅ Serve frontend (after middleware)
 app.use(express.static(frontendPath));
 
-// Health check (Render uses this to keep service alive)
+// Health check
 app.get('/api/health', (req, res) => {
   res.json({ status: 'ok', message: 'Server is running' });
 });
@@ -47,12 +91,14 @@ app.post('/api/create-checkout-session', async (req, res) => {
       return res.status(400).json({ error: 'Cart is empty' });
     }
 
-    const lineItems = items.map(item => {
+    const lineItems = items.map((item) => {
       let imageUrl = null;
       if (item.image) {
-        imageUrl = item.image.startsWith('http') 
-          ? item.image 
-          : `${process.env.CLIENT_URL}${item.image.startsWith('/') ? '' : '/'}${item.image}`;
+        imageUrl = item.image.startsWith('http')
+          ? item.image
+          : `${process.env.CLIENT_URL}${item.image.startsWith('/') ? '' : '/'}${
+              item.image
+            }`;
       }
 
       return {
@@ -75,7 +121,9 @@ app.post('/api/create-checkout-session', async (req, res) => {
       mode: 'payment',
       success_url: `${process.env.CLIENT_URL}/success.html?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${process.env.CLIENT_URL}/cart.html`,
-      shipping_address_collection: { allowed_countries: ['US', 'CA', 'GB', 'AU'] },
+      shipping_address_collection: {
+        allowed_countries: ['US', 'CA', 'GB', 'AU'],
+      },
       billing_address_collection: 'required',
     });
 
@@ -86,47 +134,13 @@ app.post('/api/create-checkout-session', async (req, res) => {
   }
 });
 
-// Stripe webhook
-app.post('/api/webhook', express.raw({ type: 'application/json' }), async (req, res) => {
-  const sig = req.headers['stripe-signature'];
-  if (!sig) return res.status(400).send('Missing Stripe signature');
-
-  try {
-    const event = stripe.webhooks.constructEvent(
-      req.body,
-      sig,
-      process.env.STRIPE_WEBHOOK_SECRET
-    );
-
-    switch (event.type) {
-      case 'checkout.session.completed':
-        console.log('Payment successful:', event.data.object.id);
-        break;
-      case 'payment_intent.succeeded':
-        console.log('PaymentIntent successful:', event.data.object.id);
-        break;
-      case 'payment_intent.payment_failed':
-        console.log('Payment failed:', event.data.object.id);
-        break;
-      default:
-        console.log(`Unhandled event type: ${event.type}`);
-    }
-
-    res.json({ received: true });
-  } catch (err) {
-    console.error('Webhook signature verification failed:', err.message);
-    res.status(400).send(`Webhook Error: ${err.message}`);
-  }
-});
-
-// Fallback: serve index.html for all frontend routes
+// ✅ Fallback: send index.html for all other routes (after API routes)
 app.get('*', (req, res) => {
   res.sendFile(path.join(frontendPath, 'index.html'));
 });
 
 // Start server
 app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+  console.log(`🚀 Server running on port ${PORT}`);
   console.log(`Health check: ${process.env.CLIENT_URL || 'http://localhost'}${'/api/health'}`);
-  console.log(`Stripe webhook endpoint: /api/webhook`);
 });
